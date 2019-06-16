@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>login登录界面</title>
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/static/css/login.css}">
+    <!-- Bootstrap -->
+    <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
+
+
+    <script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/static/js/bootstrap.js}"></script>
+
+
+
+</head>
+<body>
+<!-- 登录-->
+<div class="container-fluid ">
+    <div class="row ">
+        <div class="form ">
+            <form class="form-horizontal wow slideInDown "
+                  th:action="@{/root_user/checkLogin}" method="post">
+                <h1 class="col-sm-offset-3">今日诗缘</h1>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label ">用户名：</label>
+                    <div class="col-sm-7">
+
+                        <input type="text" class="form-control" name="username"
+                               id="inputEmail3" placeholder="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-3 control-label">密码:</label>
+                    <div class="col-sm-7">
+
+                        <input type="password" class="form-control" name="password"
+                               id="inputPassword3" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                        <div class="checkbox">
+                            <label> <input type="checkbox"> 记住我
+                            </label> <a class="col-sm-offset-7" th:href="@{/user/register}"><span
+                                class="regist">注册</span></a> <a th:href="@{#}"><span class="regist">忘记密码?</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-5">
+
+                        <input class="form-control btn btn-danger" id="submit_btn"
+                               value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;陆" type="submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

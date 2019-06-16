@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lss.poetry.mapper.RootUserMapperCustom">
+    <resultMap id="BaseResultMap" type="com.lss.poetry.pojo.RootUser">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+      
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, username, password
+    </sql>
+    <!-- 登陆验证 -->
+    <select id="login" parameterType="com.lss.poetry.pojo.RootUser"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from root_user
+        <where>
+            username=#{username} and password=#{password}
+        </where>
+    </select>
+</mapper>

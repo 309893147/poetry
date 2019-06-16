@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lss.poetry.mapper.CollectMapperCustom">
+	<resultMap id="MyMpMap" type="com.lss.poetry.pojo.Collect">
+		<!-- WARNING - @mbg.generated -->
+		<id column="collect_id" jdbcType="INTEGER" property="collectId" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="mp_id" jdbcType="INTEGER" property="mpId" />
+		<result column="datetime" jdbcType="VARCHAR"
+			property="datetime" />
+		<!-- 指定封装 一个类型 联合查询 -->
+		<association property="modernPoetry"
+			javaType="com.lss.poetry.pojo.ModernPoetry">
+			<id column="mp_id" jdbcType="INTEGER" property="mpId" />
+			<result column="mp_title" jdbcType="VARCHAR"
+				property="mpTitle" />
+			<result column="mp_content" jdbcType="VARCHAR"
+				property="mpContent" />
+			<result column="mp_img" jdbcType="VARCHAR" property="mpImg" />
+			<result column="mp_author" jdbcType="VARCHAR"
+				property="mpAuthor" />
+			<result column="mp_datetime" jdbcType="VARCHAR"
+				property="mpDatetime" />
+			<result column="pin_yin" jdbcType="VARCHAR" property="pinYin" />
+			<result column="mp_detail" jdbcType="LONGVARCHAR"
+				property="mpDetail" />
+		</association>
+
+		<association property="user"
+			javaType="com.lss.poetry.pojo.User">
+			<id column="id" jdbcType="VARCHAR" property="id" />
+			<result column="open_id" jdbcType="VARCHAR" property="openId" />
+			<result column="avatar_url" jdbcType="VARCHAR"
+				property="avatarUrl" />
+			<result column="city" jdbcType="VARCHAR" property="city" />
+			<result column="nick_name" jdbcType="VARCHAR"
+				property="nickName" />
+			<result column="gender" jdbcType="VARCHAR" property="gender" />
+			<result column="province" jdbcType="VARCHAR"
+				property="province" />
+			<result column="create_time" jdbcType="VARCHAR"
+				property="createTime" />
+			<result column="update_time" jdbcType="VARCHAR"
+				property="updateTime" />
+		</association>
+	</resultMap>
+	<select id="getMyCollect" resultMap="MyMpMap"
+		parameterType="java.lang.String">
+		SELECT collect_id,
+		mp_title,mp_content,mp_img,mp_author,mp_detail
+		FROM collect
+		,modern_poetry,user
+		WHERE
+		modern_poetry.mp_id=collect.mp_id and
+		collect.user_id=#{uId,jdbcType=VARCHAR};
+	</select>
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lss.poetry.mapper.CollectMapper">
+  <resultMap id="BaseResultMap" type="com.lss.poetry.pojo.Collect">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="collect_id" jdbcType="INTEGER" property="collectId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="mp_id" jdbcType="INTEGER" property="mpId" />
+    <result column="datetime" jdbcType="VARCHAR" property="datetime" />
+  </resultMap>
+  
+ 
+</mapper>

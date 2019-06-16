@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lss.poetry.mapper.ModernPoetryMapper">
+    <resultMap id="BaseResultMap" type="com.lss.poetry.pojo.ModernPoetry">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="mp_id" jdbcType="INTEGER" property="mpId"/>
+        <result column="mp_title" jdbcType="VARCHAR" property="mpTitle"/>
+        <result column="mp_content" jdbcType="VARCHAR" property="mpContent"/>
+        <result column="mp_img" jdbcType="VARCHAR" property="mpImg"/>
+        <result column="mp_author" jdbcType="VARCHAR" property="mpAuthor"/>
+        <result column="mp_datetime" jdbcType="VARCHAR" property="mpDatetime"/>
+        <result column="pin_yin" jdbcType="VARCHAR" property="pinYin"/>
+        <result column="mp_detail" jdbcType="LONGVARCHAR" property="mpDetail"/>
+        <result column="views" jdbcType="INTEGER" property="views"/>
+    </resultMap>
+
+
+    <select id="getMpDesc" parameterType="com.lss.poetry.pojo.ModernPoetry" resultMap="BaseResultMap">
+-- 		select
+-- 		mp_id,mp_title,mp_img,mp_author,mp_datetime,mp_detail,views
+-- 		FROM modern_poetry
+-- 		/*WHERE mp_id  >= (SELECT floor(RAND() * (SELECT MAX(mp_id) FROM
+-- 		`modern_poetry`)))
+-- 		ORDER BY mp_id LIMIT 5;*/
+
+	select mp_id,mp_title,mp_content,mp_img,mp_author,mp_datetime,mp_detail,views from modern_poetry ORDER BY mp_id DESC
+
+	</select>
+
+
+    <select id="randomQueryMp" parameterType="com.lss.poetry.pojo.ModernPoetry" resultMap="BaseResultMap">
+-- 		select
+-- 		mp_id,mp_title,mp_img,mp_author,mp_datetime,mp_detail,views
+-- 		FROM modern_poetry
+-- 		/*WHERE mp_id  >= (SELECT floor(RAND() * (SELECT MAX(mp_id) FROM
+-- 		`modern_poetry`)))
+-- 		ORDER BY mp_id LIMIT 5;*/
+
+		SELECT mp_id,mp_title,mp_img,mp_author,mp_datetime,mp_detail,views  FROM modern_poetry WHERE mp_id >=
+		((SELECT MAX(mp_id) FROM modern_poetry)-(SELECT MIN(mp_id) FROM modern_poetry)) * RAND()
+		 + (SELECT MIN(mp_id) FROM modern_poetry) limit 5;
+
+
+	</select>
+
+    <select id="getMpByPinYin" parameterType="com.lss.poetry.pojo.ModernPoetry" resultMap="BaseResultMap">
+		select
+		mp_id,mp_title,mp_img,mp_author,mp_datetime,mp_detail,views
+		FROM modern_poetry
+		WHERE pin_yin=#{pinYin,jdbcType=VARCHAR};
+
+	</select>
+
+    <update id="updateViews" parameterType="com.lss.poetry.pojo.ModernPoetry"  >
+        update modern_poetry
+        <set>
+            views=#{newMpViews}
+        </set>
+        where mp_id=#{mpId,jdbcType=INTEGER};
+
+    </update>
+
+</mapper>

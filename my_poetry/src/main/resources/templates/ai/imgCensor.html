@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<button type="button" class="btn btn-primary  col-sm-1 col-md-offset-2"
+		id="product_update_btn">发布</button>
+	<script>
+		//点击更新put请求
+		$("#product_update_btn")
+				.click(
+						function() {
+
+							$
+									.ajax({
+										url : "/ai",
+										type : "POST",
+
+										data : { // image 与 imgUrl二选其一
+											"image" : "/9j/4AAQSkZJRgABAQEPMJkR0FdXVridlPy/9k=",
+											"imgUrl" : "http://aip.bdstatic.com/portal/dist/1522402512491/ai_images/technology/imagecensoring/demo-card-4.jpg",
+											"scenes" : [ "ocr", "politician",
+													"antiporn", "terror",
+													"webimage", "disgust",
+													"watermark", "quality",
+													"accurate", "accuratebasic" ],
+											"sceneConf" : { // 可不填写
+												"webimage" : {}, // 可不填写
+												"ocr" : {
+													"detect_direction" : "false",
+													"recognize_granularity" : "big",
+													"language_type" : "CHN_ENG",
+													"mask" : "-"
+												}
+											}
+										},
+										success : function(result) {
+											alert('恭喜，修改成功！'); //弹出修改成功
+											//window.location.href = '/mp/mpList'; //跳转到上一页面
+										}
+
+									});
+
+						});
+	</script>
+</body>
+</html>

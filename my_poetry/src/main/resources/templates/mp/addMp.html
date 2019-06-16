@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>index主界面</title>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/root.css}">
+	<!--fileinput 样式-->
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/static/css/fileinput.css}">
+	<!-- Bootstrap -->
+	<link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
+	<script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{/static/js/bootstrap.js}"></script>
+	<!--fileinput 文件上传 -->
+	<script th:src="@{/static/js/fileinput.js}"></script>
+	<script th:src="@{/static/js/zh.js}"></script>
+</head>
+<body>
+<header class="wow fadeInRight">
+	<img th:src="@{/static/images/logo.jpg}" class="img-circle logo"
+		 alt="logo" />
+	<div class="desc">今日诗缘</div>
+	<br> <br>
+	<h4 class="col-md-offset-10 wel_root">
+		<!--  		欢迎管理员<span th:text="${session.currentUser.username}"></span>登陆!   -->
+	</h4>
+</header>
+<!-- /.container-fluid -->
+
+<div class="container-fluid">
+	<div class="row ">
+
+		<div class="col-md-1" id="left">
+			<a href="#systemSetting" data-toggle="collapse"> <i
+					class="glyphicon glyphicon-cog"></i>后台管理 <span
+					class="pull-right glyphicon glyphicon-chevron-down"></span><br />
+			</a>
+
+			<ul id="systemSetting"
+				class="nav nav-pills nav-stacked collapse in ">
+
+				<li><a th:href="@{/mp/mpList}"><i
+						class="glyphicon glyphicon-home"></i>现代诗管理</a></li>
+				<li><a th:href="@{/poet/poetList}"><i
+						class="glyphicon glyphicon-home"></i>诗人管理</a></li>
+				<li><a th:href="@{/user/login}"><i
+						class="glyphicon glyphicon-off "></i>退出登陆</a></li>
+
+			</ul>
+			</br>
+
+		</div>
+
+		<!-- 显示表格数据 -->
+
+		<div class=" col-md-11 publish " id="right">
+			<!-- 将数据appendTo tbody 定义id -->
+			<form class="form-horizontal" th:action="@{/addMp}" method="post">
+				<div class="form-group">
+					<label class="col-sm-2">题目:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="title" name="mpTitle">
+						<span class="help-block"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2">作者:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="title"
+							   name="mpAuthor"> <span class="help-block"></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2">拼音:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="title"
+							   name="pinYin"> <span class="help-block"></span>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="col-sm-2">详细内容:</label>
+					<div class="col-sm-7">
+						<textarea rows="30" cols="110" name="mpDetail"></textarea>
+						<span class="help-block"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2">佳句:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="title"
+							   name="mpContent"> <span class="help-block"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2">图片:</label>
+					<div class="col-sm-5">
+						<input id="file_upload" type="file" name="img" /> <input
+							id="picture" type="hidden" name="mpImg" />
+					</div>
+					<!-- 插入时间 -->
+					<input id="mpDateTime" type="hidden" name="mpDateTime" />
+					<!-- 插入时间 -->
+					<input id="views" type="hidden" name="views" />
+				</div>
+
+				<br /> <br />
+				<button type="submit"
+						class="btn btn-primary  col-sm-1 col-md-offset-2"
+						id="product_add_btn">发布</button>
+
+				<button type="reset" class="btn btn-danger col-sm-1 ">重置</button>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+<script th:inline="javascript">
+	$("#file_upload").fileinput({
+
+		language : 'zh', //设置语言
+
+		uploadUrl : "/upload/insert", //上传的地址
+
+		allowedFileExtensions : [ 'jpg', 'gif', 'png' ],//接收的文件后缀
+
+		//uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+
+		uploadAsync : true, //默认异步上传
+
+		showUpload : true, //是否显示上传按钮
+
+		showRemove : true, //显示移除按钮
+
+		showPreview : true, //是否显示预览
+
+		showCaption : true,//是否显示标题
+
+		browseClass : "btn btn-primary", //按钮样式
+
+		dropZoneEnabled : true,//是否显示拖拽区域
+
+		//minImageWidth: 50, //图片的最小宽度
+
+		//minImageHeight: 50,//图片的最小高度
+
+		//maxImageWidth: 1000,//图片的最大宽度
+
+		//maxImageHeight: 1000,//图片的最大高度
+
+		//maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+
+		//minFileCount: 0,
+
+		maxFileCount : 1, //表示允许同时上传的最大文件个数
+		//文件上传必须设置
+		enctype : 'multipart/form-data',
+
+		validateInitialCount : true,
+
+		previewFileIcon : "<iclass='glyphicon glyphicon-king'></i>",
+
+		msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+	})
+	//异步上传返回结果处理
+	$('#file_upload').on('fileerror', function(event, data, msg) {
+		console.log("fileerror");
+		console.log(data);
+	});
+	//异步上传返回结果处理
+	$("#file_upload").on("fileuploaded",
+			function(event, data, previewId, index) {
+				$("#picture").val(data.response.url)
+
+			});
+
+	//上传前
+	$('#file_upload').on('filepreupload',
+			function(event, data, previewId, index) {
+				console.log("filepreupload");
+
+			});
+</script>
+</body>
+</html>

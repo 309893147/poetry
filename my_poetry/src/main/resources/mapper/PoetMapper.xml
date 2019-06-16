@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lss.poetry.mapper.PoetMapper" >
+  <resultMap id="BaseResultMap" type="com.lss.poetry.pojo.Poet" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="poet_id" property="poetId" jdbcType="INTEGER" />
+    <result column="poet_name" property="poetName" jdbcType="VARCHAR" />
+    <result column="poet_img" property="poetImg" jdbcType="VARCHAR" />
+      
+      <collection property="modernPoetry"  ofType="com.lss.poetry.pojo.ModernPoetry">
+          <id column="mp_id" jdbcType="INTEGER" property="mpId"/>
+          <result column="mp_title" jdbcType="VARCHAR" property="mpTitle"/>
+          <result column="mp_content" jdbcType="VARCHAR" property="mpContent"/>
+          <result column="mp_img" jdbcType="VARCHAR" property="mpImg"/>
+          <result column="mp_author" jdbcType="VARCHAR" property="mpAuthor"/>
+          <result column="mp_datetime" jdbcType="VARCHAR" property="mpDatetime"/>
+          <result column="pin_yin" jdbcType="VARCHAR" property="pinYin"/>
+          <result column="mp_detail" jdbcType="LONGVARCHAR" property="mpDetail"/>
+          <result column="views" jdbcType="INTEGER" property="views"/>
+      </collection>
+  </resultMap>
+
+  <select id="selectPoet" parameterType="com.lss.poetry.pojo.Poet" resultMap="BaseResultMap">
+		select
+		poet_id,poet_name,poet_img
+		FROM poet
+		/*WHERE mp_id  >= (SELECT floor(RAND() * (SELECT MAX(mp_id) FROM
+		`modern_poetry`)))
+		ORDER BY mp_id LIMIT 5;*/
+
+	</select>
+
+    <select id="getPoetAllMpByPageName" parameterType="com.lss.poetry.pojo.Poet" resultMap="BaseResultMap">
+		select
+		mp.mp_id,mp.mp_title,mp.mp_img,mp.mp_author,mp.mp_datetime,mp.mp_detail,mp.views,mp.mp_content,p.poet_name
+		FROM modern_poetry mp,poet p
+		WHERE p.poet_name=#{poetName,jdbcType=VARCHAR} and mp.mp_author=p.poet_name;
+
+	</select>
+
+
+</mapper>

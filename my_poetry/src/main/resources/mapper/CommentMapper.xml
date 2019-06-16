@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lss.poetry.mapper.CommentMapper">
+	<resultMap id="BaseResultMap"
+		type="com.lss.poetry.pojo.Comment">
+
+		<!-- WARNING - @mbg.generated -->
+
+		<id column="comment_id" property="commentId" jdbcType="INTEGER" />
+		<result column="mp_id" property="mpId" jdbcType="INTEGER" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="from_userid" property="fromUserid"
+			jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="VARCHAR" />
+
+		<!-- 指定封装 一个类型 联合查询 -->
+		<association property="user"
+			javaType="com.lss.poetry.pojo.User">
+			<id column="id" jdbcType="VARCHAR" property="id" />
+			<result column="open_id" jdbcType="VARCHAR" property="openId" />
+			<result column="avatar_url" jdbcType="VARCHAR"
+				property="avatarUrl" />
+			<result column="city" jdbcType="VARCHAR" property="city" />
+			<result column="nick_name" jdbcType="VARCHAR"
+				property="nickName" />
+			<result column="gender" jdbcType="VARCHAR" property="gender" />
+			<result column="province" jdbcType="VARCHAR"
+				property="province" />
+			<result column="create_time" jdbcType="VARCHAR"
+				property="createTime" />
+			<result column="update_time" jdbcType="VARCHAR"
+				property="updateTime" />
+		</association>
+	</resultMap>
+
+	<select id="getComments"
+		parameterType="com.lss.poetry.pojo.Comment" resultMap="BaseResultMap">
+
+
+		SELECT * from
+		comment,user where comment.from_userid=user.id and comment.mp_id=#{mpId,jdbcType=INTEGER} ORDER BY
+		comment.comment_id DESC
+	</select>
+
+</mapper>

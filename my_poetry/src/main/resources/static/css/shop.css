@@ -1,0 +1,83 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    color: #5a5a5a;
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+
+#main {
+    position: relative;
+    margin: 0 auto;
+}
+
+.box {
+    padding: 15px 0 0 15px;
+    float: left;
+}
+
+.pic {
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 6px #ccc;
+    border-radius: 5px;
+}
+
+.pic img {
+    width: 250px;
+    height: auto;
+}
+
+.jumbotron {
+    color: #FFA500;
+    background: url(../images/bk_main.jpg) no-repeat;
+}
+
+.jumbotron p {
+    color: #EEEE00;
+}
+
+.time {
+    font-size: 25px;
+}
+
+.nav {
+    font-size: 17px;
+}
+
+.right_go {
+    position: fixed;
+    right: 20px;
+    bottom: 15px;
+}
+
+.right_go a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.foot_money {
+    font-size: 16px;
+    color: #A52A2A;
+}
+
+.foot_a {
+    padding-left: 170px;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.foot_a a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.foot_title {
+    padding-left: 68px;
+    font-weight: bold;
+    font-size: 17px;
+}
+

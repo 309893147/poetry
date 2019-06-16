@@ -1,0 +1,42 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.form-horizontal {
+    padding-top: 80px;
+    padding-bottom: 110px;
+}
+
+body {
+    background: url(../images/timg.jpg) no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+h1 {
+    padding-bottom: 55px;
+}
+
+.regist {
+    color: #ffe4c4;
+    font-size: 15px;
+}
+
+.form {
+    background: rgba(255, 255, 255, 0.2);
+    width: 800px;
+    margin: 220px auto;
+}
+
+/*阴影*/
+
+input[type="text"], input[type="password"] {
+    padding-left: 26px;
+}
+
+.checkbox {
+    padding-left: 21px;
+}
